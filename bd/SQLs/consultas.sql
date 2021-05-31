@@ -1,7 +1,6 @@
 /*
 Consulta 1
-Deseja-se saber qual rede social é mais apropriada para a divulgação de um evento razoavelmente custoso (mais de R$5.000) e ocorrido em abril.
-
+A organizadora está trabalhando na divulgação de um grande evento que ocorrerá no mês de maio do próximo ano. Para isso, já está fazendo levantamentos sobre qual é a melhor rede social que deve apostar em anúncios pagos e, assim, otimizar o retorno financeiro e o gasto com esse tipo de divulgação. Os responsáveis estão em busca das redes sociais utilizadas em evento(s) razoavelmente custosos (mais de R$5.000) e com notas emitidas no mês do abril, período em que a divulgação está mais forte. 
 Nomes das redes sociais que promoveram eventos com custo superior a 5.000 reais e que tiveram notas emitidas no mês de abril.
 
 Algebra Relacional:
