@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title> Eventos </title>
+    <meta chartset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- CSS Externos -->
+    <link href="stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="stylesheets/participante.css" rel="stylesheet">
+    <!-- Fonte Ballo Da 2 e Poppins -->
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Da+2|Pangolin|Poppins&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Cabeçalho -->
+    <header class="align-self-center shadow-sm p-3 mb-5 bg-white rounded">
+        <div id="container" class="container">
+            <div class="row">
+                <a href="/"> <h2 class="titulo"> Participante </h2> </a>
+            </div>
+        </div>
+    </header>
+    <!-- Main -->
+    <main>
+        <div id="container" class="container-fluid">
+            <div class="row">
+
+                <!-- Menu Lateral -->
+                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center text shadow-sm p-3 mb-5 bg-white rounded">
+                    <div class="titulo mb-4">
+                        <a href="/todosEventosParticipante" class="text"> Todos os Eventos </a>
+                    </div>
+                    <div class="titulo mb-4">
+                        <a href="/eventosParticipante" class="text"> Seus Eventos </a>
+                    </div>
+                    <div class="titulo">
+                        <a href="/contaParticipante" class="text"> Minha Conta </a>
+                    </div>
+                </div>
+                
+                <!-- Corpo da página -->
+                <div class="offset-1 col-lg-8 col-md-8 col-sm-11 col-xs-11 text shadow-sm p-3 mb-5 bg-white rounded">
+                    <div class="row mb-3">
+                        <div class="col-12 text-center">
+                            <h5 class="titulo"> Todos os Eventos </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <% if(eventos.length == 0){ %>
+                            <div class="col-12 text-center">
+                                <p class="body-text-p">Não há nenhum evento disponível! </p>
+                            </div>
+                        <% } else { %>
+                            <% for(evento of eventos) { %>
+                                <div class="offset-1 col-lg-5 col-md-5 col-sm-12 col-xs-12 mb-5">
+                                    <div class="card" style="width: 18rem;">
+                                        <img class="card-img-top tamanho-imagem-card" src="images/evento.jpg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title"> <%= evento.tema %> </h5>
+                                            <p class="card-text"> <%= evento.nome %> </p>
+                                        </div>
+                                        <div class="card-body">
+                                            <form action="/inscricaoEvento" method="POST">
+                                                <input type="hidden" name="idEvento" value="<%= evento.id_evento %>">
+                                                <button type="submit" class="botaoForm">  Comprar Ingresso </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript" src="javascripts/jquery.js"></script>
+    <script type="text/javascript" src="javascripts/bootstrap.js"></script>
+</body>
+</html>
