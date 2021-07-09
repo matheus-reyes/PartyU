@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <title> Eventos </title>
+    <title> Party U </title>
     <meta chartset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,15 +11,16 @@
     <link href="stylesheets/index.css" rel="stylesheet">
     <!-- Fonte Ballo Da 2 e Poppins -->
     <link href="https://fonts.googleapis.com/css?family=Baloo+Da+2|Pangolin|Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Passion+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <!-- Cabeçalho -->
-    <header class="align-self-center shadow-sm p-3 mb-5 bg-white rounded">
+    <header class="align-self-center p-3 bg-white rounded">
         <div id="container" class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text">
-                    <a href="/"> <h2 class="titulo"> Eventos </h2> </a> 
+                    <a href="/"> <p id="titulo_logo"> PARTY U </p> </a> 
                 </div>
             </div>
         </div>
@@ -94,7 +95,40 @@
             </div>
         </section>
     </main>
+
+    <section>
+        <!-- Modal Feedback -->
+        <div class="modal fade" id="modal-feedback" tabindex="-1" role="dialog" aria-labelledby="modal-adicionar-classe-titulo" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-adicionar-classe-titulo"> Aviso </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">        
+                        <div class="row justify-content-center">
+                            <div class="col-12"> 
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input id="feedback" type="hidden" value="<%= mensagemFeedback %>">
+                                        <p id="mensagemFeedback" class="body-text-p text-center"> </p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal"> Fechar </button>
+                                </div>
+                            </div>
+                        </div>            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <script type="text/javascript" src="javascripts/jquery.js"></script>
     <script type="text/javascript" src="javascripts/bootstrap.js"></script>
+    <script type="text/javascript" src="javascripts/feedback.js"></script>
 </body>
 </html>

@@ -5,9 +5,8 @@ module.exports = {
 
     // Controller de acesso à página cadastro do participante
     cadastroParticipante: (req, res) => {
-
-        res.render("cadastroParticipante");
-
+        let mensagemFeedback = "inicio"
+        res.render("cadastroParticipante", {mensagemFeedback});
     },
 
     // Controller de acesso à página cadastro da promotora
@@ -36,15 +35,24 @@ module.exports = {
         const Instrutor = false;
         const Avaliador = false;
         const Autor_Artigo = false;
-
+        let mensagemFeedback = "";
+        
+        if(await Participante.findOne({where:{cpf:cpf}}) != null){
+            mensagemFeedback = "Já existe um usuário com o CPF informado."
+        }
+        
+        if(await Participante.findOne({where:{e_mail:e_mail}}) != null){
+            mensagemFeedback = "Já existe um usuário com o e-mail informado."
+        }
+        
         //criptografa a senha com bcrypt
         let senhaCriptografada = bcrypt.hashSync(password, 10);
 
-        // compara se as senhas são iguais
-        if(bcrypt.compareSync(confirmpassword, senhaCriptografada)){
+        // Se não existem erros, cria um novo participante com os dados informados
+        if(mensagemFeedback == ""){
             
             // Faz o cadastro do participante no banco de dados
-            await Participante.create({
+            let novoParticipante = await Participante.create({
                 cpf,
                 nome,
                 cep,
@@ -60,13 +68,17 @@ module.exports = {
                 Avaliador, 
                 Autor_Artigo
             });
+            
+            mensagemFeedback = "Cadastro realizado com sucesso!"
 
             // redireciona a página de login
-            res.redirect("/login");
+            res.render("login", {mensagemFeedback});
 
-        //se não são iguais, redireciona ao cadastro novamente
+        //se existe algum erro
         }else{
-            res.redirect("/cadastroParticipante");
+            console.log("**************************")
+            console.log(mensagemFeedback)
+            res.render("cadastroParticipante", {mensagemFeedback});
         }
 
     },

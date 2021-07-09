@@ -5,8 +5,8 @@ module.exports = {
 
     //função para carregar a página de login
     login: (req, res) => {
-
-        res.render("login");
+        let mensagemFeedback = "inicio"
+        res.render("login", {mensagemFeedback});
 
     },
 
