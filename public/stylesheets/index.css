@@ -8,6 +8,16 @@ html {
     scroll-behavior: smooth;
 }
 
+.textFormat{
+    font-family: 'Poppins', sans-serif;
+    color: #495057;
+    font-size: 1.1rem;
+}
+
+#logoLogin{
+    width:5rem;
+}
+
 /* Logo */
 
 #logo{

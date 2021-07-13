@@ -17,9 +17,9 @@
 
 <body>
     <!-- Cabeçalho -->
-    <header class="align-self-center p-3 bg-white rounded">
+    <header class="align-self-center pt-3 pb-0 mb-0 bg-white rounded">
         <div id="container" class="container">
-            <div class="row">
+            <div class="row pb-0 mb-0">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <a href="/" > <p id="titulo_logo"> PARTY U </p> </a> 
                 </div>
@@ -29,7 +29,13 @@
     <!-- Main -->
     <main>
         <section>
-            <h2 class="text-center titulo"> Login </h2>
+            <div class="container">
+                <div class="row justify-content-center pt-0 mt-0">
+                    <img id="logoLogin" src="/images/logo.png">
+                </div>
+                <h2 class="text-center titulo"> Login </h2>
+            </div>
+            
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5">
@@ -57,7 +63,13 @@
                             </div>
                         </form>
                     </div>
-                </div>  
+                </div> 
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <p class="text-center mb-3 textFormat">É participante e ainda não tem uma conta? <a href="/cadastroParticipante">Clique aqui</a></p>
+                        <p class="text-center mb-3 textFormat">É promotor e ainda não tem uma conta? <a href="/cadastroPromotora">Clique aqui</a></p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
