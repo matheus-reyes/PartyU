@@ -25,9 +25,12 @@
             <div class="row">
                 <!-- Corpo da página -->
                 <div class="col-12 text p-3 mb-5 bg-white rounded">
-                    <div class="row mb-3">
-                        <div class="col-12 text-center">
-                            <h5 class="titulo"> Todos os Eventos </h5>
+                    <div class="row mb-3 justify-content-center">
+                        <div class="col-6 text-center">
+                            <div class="form-group input-group">
+                                <i class="icone-busca fas fa-search pl-3 pr-3 pt-2"></i>
+                                <input name="consulta" id="txt_consulta" placeholder="Busque por nome ou categoria de eventos" type="text" class="form-control">
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -37,11 +40,11 @@
                             </div>
                         <% } else { %>
                             <% for(evento of eventos) { %>
-                                <div class="offset-1 col-lg-5 col-md-5 col-sm-12 col-xs-12 mb-5">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 mb-5 pl-5 card-busca">
                                     <div class="card" style="width: 18rem;">
                                         <img class="card-img-top tamanho-imagem-card" src="images/evento.jpg" alt="Card image cap">
                                         <div class="card-body">
-                                            <h5 class="card-title"> <%= evento.tema %> </h5>
+                                            <p class="card-title"> <%= evento.tema %> </p>
                                             <p class="card-text"> <%= evento.nome %> </p>
                                         </div>
                                         <div class="card-body">
@@ -61,5 +64,7 @@
     </main>
     <script type="text/javascript" src="javascripts/jquery.js"></script>
     <script type="text/javascript" src="javascripts/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.js"></script>
+    <script type="text/javascript" src="javascripts/participante.js"></script>
 </body>
 </html>
