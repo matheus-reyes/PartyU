@@ -36,7 +36,7 @@ module.exports = {
                 const eventos = await Evento.findAll();
 
                 // Redireciona ao início do participante com seus dados
-                res.render("participante/inicio", {usuario:req.session.usuario, eventos});
+                res.render("participante/inicio", {usuario:req.session.usuario, eventos, feedback: "inicio"});
 
             }
         }
@@ -64,7 +64,7 @@ module.exports = {
         }
 
         //Se não foi encontrado nenhum usuário, redireciona ao login
-        res.render("login");
+        res.render("login", {mensagemFeedback:"E-mail e/ou senha incorretos"});
 
     }
 

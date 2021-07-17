@@ -4,20 +4,21 @@ const bcrypt = require("bcrypt");
 module.exports = {
 
     inicio: async (req, res) => {
+        let feedback = "inicio";
 
         // Salva todos os eventos
         const eventos = await Evento.findAll();
 
-        res.render("participante/inicio", {eventos});
+        res.render("participante/inicio", {eventos, feedback});
 
     },
 
     todosEventosParticipante: async (req, res) => {
-
+        let feedback = "inicio";
         // Salva todos os eventos
         const eventos = await Evento.findAll();
 
-        res.render("participante/inicio", {eventos});
+        res.render("participante/inicio", {eventos, feedback});
 
     },
 
@@ -78,62 +79,81 @@ module.exports = {
 
     },
 
-    editarParticipante: async (req, res) => {
-
-        const usuario = req.session.usuario;
-        // Valores recuparados do Formulário
+    editarNome: async (req, res) => {
         const nome = req.body.nome;
-        const cpf = req.body.cpf;
-        const telefone = req.body.telefone;
-        const cep = req.body.cep;
-        const e_mail = req.body.email;
-        const password = req.body.password;
-        const confirmpassword = req.body.confirmpassword;
+        const cpf = req.session.usuario.cpf;
 
-        // Salva todos os eventos
+        await Participante.update({
+            nome
+        },
+        {
+            where:{
+                cpf
+            }
+        });
+
+        let feedback = "Nome alterado com sucesso!";
+
+        req.session.usuario.nome = nome;
+
         const eventos = await Evento.findAll();
 
-        // Se a senha bate com a confirmação de senha
-        if(password == confirmpassword){
-            // Se o usuário não digitou uma senha, a senha não é alterada
-            if(password == ""){
-                await Participante.update({
-                    nome,
-                    cpf,
-                    telefone,
-                    cep,
-                    e_mail
-                },
-                {
-                    where:{
-                        cpf:usuario.cpf
-                    }
-                });
+        res.render("participante/inicio", {eventos, feedback});
 
-            // Se o usuário digitou uma senha, ela é alterada
-            }else{
-                await Participante.update({
-                    nome,
-                    cpf,
-                    telefone,
-                    cep,
-                    e_mail,
-                    senha: bcrypt.hashSync(password, 10)
-                },
-                {
-                    where:{
-                        cpf:usuario.cpf
-                    }
-                });
-            }
+    },
 
-            res.render("participante/inicio", {eventos});
+    editarEmail: async (req, res) => {
+        const e_mail = req.body.email;
+        const password = req.body.senhaEmail;
+        const cpf = req.session.usuario.cpf;
+        let feedback = "";
 
-        // Se não bate
-        }else{
-            res.render("participante/conta", {usuario});
+        if(bcrypt.compareSync(password, req.session.usuario.senha)){
+            await Participante.update({
+                e_mail
+            },
+            {
+                where:{
+                    cpf
+                }
+            });
+            feedback = "E-mail alterado com sucesso!";
+        } else {
+            feedback = "Senha incorreta!";
         }
 
+        req.session.usuario.e_mail = e_mail;
+
+        const eventos = await Evento.findAll();
+
+        res.render("participante/inicio", {eventos, feedback});
+    },
+
+    editarSenha: async (req, res) => {
+        const senhaAntiga = req.body.senhaAntiga;
+        const senhaNova = req.body.senhaNova;
+        const cpf = req.session.usuario.cpf;
+        let feedback = "";
+
+        if(bcrypt.compareSync(senhaAntiga, req.session.usuario.senha)){
+            await Participante.update({
+                senha: bcrypt.hashSync(senhaNova, 10)
+            },
+            {
+                where:{
+                    cpf
+                }
+            });
+            feedback = "Senha alterado com sucesso!";
+        } else {
+            feedback = "Senha incorreta!";
+        }
+
+        req.session.usuario.senha = senhaNova;
+
+        const eventos = await Evento.findAll();
+
+        res.render("participante/inicio", {eventos, feedback});
     },
 
     apagarParticipante: async (req,res) => {
