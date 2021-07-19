@@ -11,8 +11,8 @@ module.exports = {
 
     // Controller de acesso à página cadastro da promotora
     cadastroPromotora: (req, res) => {
-
-        res.render("cadastroPromotora");
+        let mensagemFeedback = "inicio"
+        res.render("cadastroPromotora", {mensagemFeedback});
 
     },
 
@@ -26,7 +26,6 @@ module.exports = {
         const cep = req.body.cep;
         const e_mail = req.body.email;
         const password = req.body.password;
-        const confirmpassword = req.body.confirmpassword;
         const Staff = false;
         const Palestrante = false;
         const Ouvinte = true;
@@ -76,8 +75,6 @@ module.exports = {
 
         //se existe algum erro
         }else{
-            console.log("**************************")
-            console.log(mensagemFeedback)
             res.render("cadastroParticipante", {mensagemFeedback});
         }
 
@@ -100,12 +97,21 @@ module.exports = {
         const PromotoraBanco = true;
         const Patrocinadora = false;
         const Organizadora = false;
+        let mensagemFeedback = "";
+
+        if(await Promotora.findOne({where:{cnpj:cnpj}}) != null){
+            mensagemFeedback = "Já existe um usuário com o CNPJ informado."
+        }
+        
+        if(await Entidade.findOne({where:{email:email}}) != null){
+            mensagemFeedback = "Já existe um usuário com o e-mail informado."
+        }
 
         //criptografa a senha com bcrypt
         let senhaCriptografada = bcrypt.hashSync(password, 10);
 
-        // compara se as senhas são iguais
-        if(bcrypt.compareSync(confirmpassword, senhaCriptografada)){
+        // Se não existem erros, cria um novo participante com os dados informados
+        if(mensagemFeedback == ""){
             
             // Faz o cadastro da promotora no banco de dados
             await Entidade.create({
@@ -127,12 +133,14 @@ module.exports = {
                 cnpj
             });
 
+            mensagemFeedback = "Cadastro realizado com sucesso!"
+
             // redireciona a página de login
-            res.redirect("/login");
+            res.render("login", {mensagemFeedback});
 
         //se não são iguais, redireciona ao cadastro novamente
         }else{
-            res.redirect("/cadastroPromotora");
+            res.render("cadastroPromotora", {mensagemFeedback});
         }
 
     }
