@@ -6,6 +6,7 @@
     <meta chartset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="sortcut icon" href="images/logo.png" type="image/x-icon" />
     <!-- CSS Externos -->
     <link href="stylesheets/bootstrap.css" rel="stylesheet">
     <link href="stylesheets/participante.css" rel="stylesheet">
@@ -81,6 +82,7 @@
                                     <div class="form-group row mb-0">
                                         <label for="nome" class="col-sm-12 col-form-label"></label>
                                         <div class="col-md-12">
+                                            <input type="hidden" id="id_eventoEditar" name="id_eventoEditar" value="<%=evento.id_evento%>">
                                             <input type="text" class="form-control" id="nome" name="nome" value="<%=evento.nome%>" placeholder="Digite o nome do evento">
                                         </div>
                                     </div>
@@ -122,7 +124,7 @@
                                 <!-- Botão para apagar evento -->
                                 <form action="/apagarEvento" method="POST">
                                     <div class="col-md-12 text-center">
-                                        <input type="hidden" value="<%=evento.id_evento%>" name="id_evento">
+                                        <input type="hidden" value="<%=evento.id_evento%>" name="id_eventoApagar">
                                         <button type="submit" class="btn w-100 botao botaoVermelho"> Apagar Evento </button>
                                     </div>
                                 </form>

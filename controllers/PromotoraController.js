@@ -40,16 +40,8 @@ module.exports = {
 
     },
 
-    contaPromotora: (req, res) => {
-
-        const usuario = req.session.usuario;
-
-        res.render("promotora/conta", {usuario});
-
-    },
-
     cadastroEvento: async (req, res) => {
-
+        let feedback = "Evento criado com sucesso!";
         const usuario = req.session.usuario;
         
         // Dados do formulário
@@ -78,15 +70,16 @@ module.exports = {
             }
 		});
 
-        res.render("promotora/inicio", {eventos});
+        res.render("promotora/inicio", {eventos, feedback});
 
     },
 
     editarEvento: async (req, res) => {
-
+        let feedback = "Evento editado com sucesso!";
         const usuario = req.session.usuario;
 
         // Dados do formulário
+        const id_evento = req.body.id_eventoEditar;
         const nome = req.body.nome;
         const tema = req.body.tema;
         const edicao = req.body.edicao;
@@ -103,7 +96,7 @@ module.exports = {
         },
         {
             where:{
-                PRO_cnpj:usuario.cnpj
+                id_evento
             }
         });
 
@@ -114,16 +107,16 @@ module.exports = {
             }
 		});
 
-        res.render("promotora/inicio", {eventos});
+        res.render("promotora/inicio", {eventos, feedback});
 
     },
 
 
     apagarEvento: async (req, res) => {
-
+        let feedback = "Evento apagado com sucesso!";
         const usuario = req.session.usuario;
 
-        const id_evento = req.body.id_evento;
+        const id_evento = req.body.id_eventoApagar;
 
         //apaga os ingressos do Evento
         await Ingresso.destroy({
@@ -146,7 +139,7 @@ module.exports = {
             }
 		});
 
-        res.render("promotora/inicio", {eventos});
+        res.render("promotora/inicio", {eventos, feedback});
     },
 
     editarNome: async (req, res) => {
