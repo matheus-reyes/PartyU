@@ -3,14 +3,23 @@ const bcrypt = require("bcrypt");
 
 module.exports = {
 
-    inicio: (req, res) => {
+    inicio: async (req, res) => {
+        let feedback = "inicio"
+        //Pega os dados da promotora pela session
+        const usuario = req.session.usuario;
 
-        res.render("promotora/inicio");
+        //Dados dos eventos da promotora
+        const eventos = await Evento.findAll({
+            where: {
+                PRO_cnpj:usuario.cnpj
+            }
+		});
+        res.render("promotora/inicio", {eventos, feedback});
 
     },
 
     eventosPromotora: async (req, res) => {
-
+        let feedback = "inicio"
         //Pega os dados da promotora pela session
         const usuario = req.session.usuario;
 
@@ -21,7 +30,7 @@ module.exports = {
             }
 		});
 
-        res.render("promotora/inicio", {eventos});
+        res.render("promotora/inicio", {eventos, feedback});
 
     },
 
@@ -140,81 +149,97 @@ module.exports = {
         res.render("promotora/inicio", {eventos});
     },
 
-    editarPromotora: async (req, res) => {
-
+    editarNome: async (req, res) => {
+        const nome_entidade = req.body.nome;
+        //Pega os dados da promotora pela session
         const usuario = req.session.usuario;
 
-        // Valores recuparados do Formulário
-        const cnpj = req.body.cnpj;
-        const nome_entidade = req.body.nome_entidade;
-        const end_estado = req.body.end_estado;
-        const end_cidade = req.body.end_cidade;
-        const end_cep = req.body.end_cep;
-        const end_logradouro = req.body.end_logradouro;
-        const end_numero = req.body.end_numero;
-        const email = req.body.email;
-        const password = req.body.password;
-        const confirmpassword = req.body.confirmpassword;
-
-        // Se a senha bate com a confirmação de senha
-        if(password == confirmpassword){
-            // Se o usuário não digitou uma senha, a senha não é alterada
-            if(password == ""){
-
-                //Faz a alteração da entidade, sem a senha
-                await Entidade.update({
-                    cnpj,
-                    nome_entidade,
-                    end_estado,
-                    end_cidade,
-                    end_logradouro,
-                    end_cep,
-                    end_numero,
-                    email
-                },
-                {
-                    where:{
-                        cnpj:usuario.cnpj
-                    }
-                });
-
-            }else{
-                
-                //Faz a alteração da entidade, com a senha
-                await Entidade.update({
-                    cnpj,
-                    nome_entidade,
-                    end_estado,
-                    end_cidade,
-                    end_logradouro,
-                    end_cep,
-                    end_numero,
-                    email,
-                    senha: bcrypt.hashSync(password, 10)
-                },
-                {
-                    where:{
-                        cnpj:usuario.cnpj
-                    }
-                });
-
+        //Dados dos eventos da promotora
+        const eventos = await Evento.findAll({
+            where: {
+                PRO_cnpj:usuario.cnpj
             }
+        });
 
-            //Dados dos eventos da promotora
-            const eventos = await Evento.findAll({
-                where: {
-                    PRO_cnpj:usuario.cnpj
+        await Entidade.update({
+            nome_entidade
+        },
+        {
+            where:{
+                cnpj:usuario.cnpj
+            }
+        });
+
+        let feedback = "Nome alterado com sucesso!";
+
+        req.session.usuario.nome_entidade = nome_entidade;
+
+        res.render("promotora/inicio", {eventos, feedback});
+
+    },
+
+    editarEmail: async (req, res) => {
+        const email = req.body.email;
+        const password = req.body.senhaEmail;
+        const usuario = req.session.usuario;
+        let feedback = "";
+
+        //Dados dos eventos da promotora
+        const eventos = await Evento.findAll({
+            where: {
+                PRO_cnpj:usuario.cnpj
+            }
+        });
+
+        if(bcrypt.compareSync(password, req.session.usuario.senha)){
+            await Entidade.update({
+                email
+            },
+            {
+                where:{
+                    cnpj:usuario.cnpj
                 }
             });
-
-            res.render("promotora/inicio", {usuario, eventos});
-        
-        }else{
-
-            res.render("promotora/conta", {usuario});
-
+            feedback = "E-mail alterado com sucesso!";
+        } else {
+            feedback = "Senha incorreta!";
         }
 
+        req.session.usuario.email = email;
+
+        res.render("promotora/inicio", {eventos, feedback});
+    },
+
+    editarSenha: async (req, res) => {
+        const senhaAntiga = req.body.senhaAntiga;
+        const senhaNova = req.body.senhaNova;
+        const usuario = req.session.usuario;
+        let feedback = "";
+
+        //Dados dos eventos da promotora
+        const eventos = await Evento.findAll({
+            where: {
+                PRO_cnpj:usuario.cnpj
+            }
+        });
+
+        if(bcrypt.compareSync(senhaAntiga, req.session.usuario.senha)){
+            await Entidade.update({
+                senha: bcrypt.hashSync(senhaNova, 10)
+            },
+            {
+                where:{
+                    cnpj:usuario.cnpj
+                }
+            });
+            feedback = "Senha alterado com sucesso!";
+        } else {
+            feedback = "Senha incorreta!";
+        }
+
+        req.session.usuario.senha = senhaNova;
+
+        res.render("promotora/inicio", {eventos, feedback});
     },
 
     apagarPromotora: async (req, res) => {

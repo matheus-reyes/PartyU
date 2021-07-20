@@ -1,0 +1,169 @@
+<!-- Jumbotron, Barra de Navegação, Frase Banner, Imagem Banner e Botão -->
+<header>
+    <div id="barra" class="container-fluid">
+        <div class="row mb-0 pb-0">
+            <div class="offset-1 col-lg-3 col-md-3 col-sm-12 pt-3">
+                <!-- Icone (Margem Esquerda) -->
+                <p id="titulo_logo"> PARTY U </p> 
+            </div>
+            <div class="offset-1 col-lg-2 col-md-2 col-sm-12 pt-5">
+                <!-- Icone (Margem Esquerda) -->
+                <a href="/eventosPromotora" > <p class="textFormat"> Seus Eventos </p> </a>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-12 pt-5">
+                <!-- Icone (Margem Esquerda) -->
+                <a href="/criarEventoPromotora" > <p class="textFormat"> Criar Evento </p> </a>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <!-- Tag que Engloba Toda a Barra de Navegação -->
+                <nav class="navbar navbar-expand navbar-fixed-top">
+                    <!-- Barra de Navegação -->
+                    <div class="navbar-collapse">
+                        <!-- (Margem Direita (Menu Dropdown), Login - Aluno, Professor)  -->
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" alt="avatar">
+                                    <div id="avatar">
+                                        <img src="/images/avatar.png">
+                                    </div>    
+                                </a>
+                                <div class="dropdown-menu" id="navDrop">
+                                    <a class="dropdown-item" href="" data-toggle="modal" data-target="#modal-alterar-nome"> Alterar Nome </a>
+                                    <a class="dropdown-item" href="" data-toggle="modal" data-target="#modal-alterar-email"> Alterar E-mail </a>
+                                    <a class="dropdown-item" href="" data-toggle="modal" data-target="#modal-alterar-senha"> Alterar Senha </a>
+                                    <a id="logout" class="dropdown-item" href="../" alt="login-professor"> Sair </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            
+        </div>
+    </div>
+</header>
+
+<section>
+    <div class="modal fade" id="modal-alterar-nome" tabindex="-1" role="dialog" aria-labelledby="modal-adicionar-classe-titulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-adicionar-classe-titulo"> Alterar Nome </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">        
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8"> 
+                            <form id="formAlterarNome" action="/editarNomePromotora" method="POST">
+                                <div class="form-group row">
+                                    <label class="col-12 col-form-label modalText">Digite um novo nome</label>
+                                    <div class="col-12">
+                                        <input id="alterarNome" type="text" class="form-control cursorText" value="" name="nome">
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center mt-3">
+                                    <p id="feedbackAlterarNome" class="feedback"> </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="botao-fechar" data-dismiss="modal"> Fechar </button>
+                                    <button type="submit" class="botao-enviar"> Alterar </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>            
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="modal fade" id="modal-alterar-email" tabindex="-1" role="dialog" aria-labelledby="modal-adicionar-classe-titulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-adicionar-classe-titulo"> Alterar e-mail </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">        
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8"> 
+                            <form id="formAlterarEmail" action="/editarEmailPromotora" method="POST">
+                                <div class="form-group row">
+                                    <label class="col-12 col-form-label modalText">Digite um novo e-mail</label>
+                                    <div class="col-12">
+                                        <input id="alterarEmail" type="text" class="form-control cursorText" value="" name="email">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-12 col-form-label modalText">Digite sua senha</label>
+                                    <div class="col-12">
+                                        <input id="alterarEmailSenha" type="password" class="form-control cursorText" name="senhaEmail">
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center mt-3">
+                                    <p id="feedbackAlterarEmail" class="feedback"> </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="botao-fechar" data-dismiss="modal"> Fechar </button>
+                                    <button type="submit" class="botao-enviar"> Alterar </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>            
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="modal fade" id="modal-alterar-senha" tabindex="-1" role="dialog" aria-labelledby="modal-adicionar-classe-titulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-adicionar-classe-titulo"> Alterar Senha </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">        
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8"> 
+                            <form id="formAlterarSenha" action="/editarSenhaPromotora" method="POST">
+                                <div class="form-group row">
+                                    <label class="col-12 col-form-label modalText">Digite sua senha antiga</label>
+                                    <div class="col-12">
+                                        <input id="alterarSenhaAntiga" type="password" class="form-control cursorText" name="senhaAntiga">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-12 col-form-labe modalText">Digite sua nova senha</label>
+                                    <div class="col-12">
+                                        <input id="alterarSenhaNova" type="password" class="form-control cursorText" name="senhaNova">
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center mt-3">
+                                    <p id="feedbackAlterarSenha" class="feedback"> </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="botao-fechar" data-dismiss="modal"> Fechar </button>
+                                    <button type="submit" class="botao-enviar"> Alterar </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>            
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/javascripts/dist/inputFileFoto.js"></script>

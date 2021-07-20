@@ -58,7 +58,7 @@ module.exports = {
                 });
 
                 // Redireciona ao início do participante com seus dados
-                res.render("promotora/inicio", {usuario:req.session.usuario, eventos});
+                res.render("promotora/inicio", {usuario:req.session.usuario, eventos, feedback: "inicio"});
 
             }
         }

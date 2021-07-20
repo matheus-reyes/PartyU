@@ -8,43 +8,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSS Externos -->
     <link href="stylesheets/bootstrap.css" rel="stylesheet">
-    <link href="stylesheets/promotora.css" rel="stylesheet">
+    <link href="stylesheets/participante.css" rel="stylesheet">
+    <link href="stylesheets/header.css" rel="stylesheet">
     <!-- Fonte Ballo Da 2 e Poppins -->
     <link href="https://fonts.googleapis.com/css?family=Baloo+Da+2|Pangolin|Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Passion+One&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5b119a7c30.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <!-- Cabeçalho -->
-    <header class="align-self-center shadow-sm p-3 mb-5 bg-white rounded">
-        <div id="container" class="container">
-            <div class="row">
-                <a href="/"> <h2 class="titulo"> Promotora </h2> </a>
-            </div>
-        </div>
-    </header>
+    <!-- Header da Página -->
+    <%- include('../partials/headerPromotora') %>
     <!-- Main -->
     <main>
         <div id="container" class="container-fluid">
-            <div class="row">
-
-                <!-- Menu Lateral -->
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center text shadow-sm p-3 mb-5 bg-white rounded">
-                    <div class="titulo mb-4">
-                        <a href="/eventosPromotora" class="text"> Seus Eventos </a>
-                    </div>
-                    <div class="titulo mb-4">
-                        <a href="/criarEventoPromotora" class="text"> Criar Evento </a>
-                    </div>
-                    <div class="titulo">
-                        <a href="/contaPromotora" class="text"> Minha Conta </a>
-                    </div>
-                </div>
-                
+            <div class="row">                
                 <!-- Corpo da página -->
-                <div class="offset-1 col-lg-8 col-md-8 col-sm-11 col-xs-11 text shadow-sm p-3 mb-5 bg-white rounded">
-                    <div class="row mb-3">
-                        <div class="col-12 text-center">
-                            <h5 class="titulo"> Seus Eventos </h5>
+                <div class="col-12 text p-3 mb-5 bg-white rounded">
+                    <div class="row mb-3 justify-content-center">
+                        <div class="col-6 text-center">
+                            <div class="form-group input-group">
+                                <i class="icone-busca fas fa-search pl-3 pr-3 pt-2"></i>
+                                <input name="consulta" id="txt_consulta" placeholder="Busque por nome ou categoria de eventos" type="text" class="form-control">
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -54,7 +40,7 @@
                             </div>
                         <% } else { %>
                             <% for(evento of eventos) { %>
-                                <div class="offset-1 col-lg-5 col-md-5 col-sm-12 col-xs-12 mb-5">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 mb-5 pl-5 card-busca">
                                     <div class="card" style="width: 18rem;">
                                         <img class="card-img-top tamanho-imagem-card" src="images/evento.jpg" alt="Card image cap">
                                         <div class="card-body">
@@ -146,9 +132,42 @@
                 </div>
             <% } %>
         </section>
+        <section>
+            <!-- Modal Feedback -->
+            <div class="modal fade" id="modal-feedback" tabindex="-1" role="dialog" aria-labelledby="modal-feedback" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal-feedback-titulo"> Aviso </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+    
+                        <div class="modal-body">        
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8"> 
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <input id="feedbacks" type="hidden" value="<%= feedback %>">
+                                            <p id="mensagemFeedback" class="texto"> </p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="botao-fechar" data-dismiss="modal"> Fechar </button>
+                                    </div>
+                                </div>
+                            </div>            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
     <script type="text/javascript" src="javascripts/jquery.js"></script>
     <script type="text/javascript" src="javascripts/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.js"></script>
+    <script type="text/javascript" src="javascripts/promotora.js"></script>
 </body>
 </html>
