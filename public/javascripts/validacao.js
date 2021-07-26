@@ -289,8 +289,7 @@
             else if (type === 'email') {
               var valid = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i.test(this.value)
               var inputID = $(this).attr('id')
-              var invalidMsg =
-                'Por favor, insira um email válido'
+              var invalidMsg = 'Por favor, insira um email válido'
               var validMsg = 'Tudo certo!'
               if (valid === false) {
                 invalidFeedback(inputID, invalidMsg)
@@ -302,9 +301,11 @@
             else if (type === 'cpf') {
               var valid = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/.test(this.value)
               var inputID = $(this).attr('id')
-              var invalidMsg =
-                'invalid cpf'
+              var invalidMsg = 'invalid cpf'
               var validMsg = 'valid cpf'
+
+              // clean(inputId)
+
               if (valid === false) {
                 invalidFeedback(inputID, invalidMsg)
               } else {
@@ -354,8 +355,7 @@
             else if (type === 'cep') {
               var valid = /[0-9]{5}-[\d]{3}/.test(this.value)
               var inputID = $(this).attr('id')
-              var invalidMsg =
-                'CEP Inválido'
+              var invalidMsg = 'CEP Inválido'
               var validMsg = 'CEP inválido'
               if (valid === false) {
                 invalidFeedback(inputID, invalidMsg)
@@ -367,9 +367,9 @@
             else if (type === 'cnpj') {
               var valid = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/.test(this.value)
               var inputID = $(this).attr('id')
-              var invalidMsg =
-                'CEP Inválido'
+              var invalidMsg = 'CEP Inválido'
               var validMsg = 'CEP inválido'
+
               if (valid === false) {
                 invalidFeedback(inputID, invalidMsg)
               } else {
@@ -394,6 +394,12 @@
 
         }) // End: Form Control on Blur Event Listener
 
+        function clean(input) {
+          if(input !== null) {
+            return input.replace(/[^A-Z0-9]/ig, "");            
+          }
+        }
+
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
         var forms = document.getElementsByClassName('needs-validation')
 
@@ -404,12 +410,31 @@
           form.addEventListener(
             'submit',
             function (event) {
+
               if (form.checkValidity() === false) {
                 event.preventDefault()
                 event.stopPropagation()
+              } else {
+                var cep = document.getElementById('cep');
+                var telefone = document.getElementById('telefone');
+                
+                cep.value = clean(cep.value);
+                telefone.value = clean(telefone.value);
+
+                var cpf = document.getElementById('cpf');
+                cpf.value = clean(cpf.value);
+
+                var cnpj = document.getElementById('cnpj');
+                cnpj.value = clean(cnpj.value);
+   
+                document.getElementById("validation").submit();
               }
 
+              event.preventDefault();
+              event.stopPropagation();
+
               form.classList.add('was-validated')
+              
             },
             false
           ) // End Submit Listener
