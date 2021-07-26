@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="sortcut icon" href="images/logo.png" type="image/x-icon" />
     <!-- CSS Externos -->
+    <link href="stylesheets/validacao.css" rel="stylesheet" />
     <link href="stylesheets/bootstrap.css" rel="stylesheet">
     <link href="stylesheets/index.css" rel="stylesheet">
     <!-- Fonte Ballo Da 2 e Poppins -->
@@ -34,84 +35,232 @@
                     <div class="col-lg-6">
                         <h2 class="text-center titulo"> Cadastro Promotora </h2>
                         <!-- Formulário Cadastro Promotora -->
-                        <form action="/cadastroPromotoraForm" method="POST">
-                            <!-- Input CNPJ -->
-                            <div class="form-group row mb-0">
-                                <label for="cnpj" class="col-sm-12 col-form-label"></label>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Digite o CNPJ" required>
-                                </div>
+                        <div class="container">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <form
+                                  action="/cadastroPromotoraForm"
+                                  class="needs-validation"
+                                  data-name="Validation Form"
+                                  id="verification"
+                                  method="post"
+                                  name="wf-form-signup-form"
+                                  novalidate=""
+                                >
+            
+                                  <div class="form-group form-group-name mx-auto">
+                                    <label class="label-form-control d-block required" for="nome" >Nome da Empresa</label >
+                                    <input
+                                      class="form-control form-control-nome w-100 required"
+                                      data-validate="empresa"
+                                      id="nome"
+                                      name="nome"
+                                      placeholder="Insira o nome da empresa"
+                                      required="required"
+                                      spellcheck="false"
+                                      title="Insira o nome da empresa"
+                                      type="text"
+                                    />
+                                    <div class="feedback"></div>
+                                  </div>
+                                  <!-- end bootstrap form-group -->
+            
+                                  <div class="form-group form-group-cpf mx-auto">
+                                    <label class="label-form-control d-block required" for="cnpj" >CNPJ</label >
+                                    <input
+                                      class="form-control form-control-cpf w-100 masked required"
+                                      data-validate="cnpj"
+                                      id="cnpj"
+                                      name="cnpj"
+                                      pattern="^[0-9./-]*$"
+                                      placeholder="XX.XXX.XXX/XXXX-XX"
+                                      required="required"
+                                      spellcheck="false"
+                                      title="Insira o CNPJ da empresa"
+                                    />
+                                    <div class="feedback"></div>
+                                  </div>
+                                  <!-- end bootstrap form-group -->
+
+                                  <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="label-form-control d-block required" for="cidade" >Cidade</label>
+                                      <input 
+                                      type="text" 
+                                      class="form-control" 
+                                      id="cidade" 
+                                      placeholder="Insira a cidade"
+                                      name="cidade" 
+                                      required>
+                                      <div class="invalid-feedback">
+                                        Por favor, insira o nome da cidade
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="label-form-control d-block required" for="Estado" >Estado</label>
+                                      <select class="custom-select" id="estado" name="estado" required>
+                                        <option selected disabled value="">Selecionar...</option>
+                                        <option>Acre</option>
+                                        <option>Alagoas</option>
+                                        <option>Amapá</option>
+                                        <option>Amazonas</option>
+                                        <option>Bahia</option>
+                                        <option>Ceará</option>
+                                        <option>Distrito Federal</option>
+                                        <option>Espírito Santo</option>
+                                        <option>Goiás</option>
+                                        <option>Maranhão</option>
+                                        <option>Mato Grosso</option>
+                                        <option>Mato Grosso do Sul</option>
+                                        <option>Minas Gerais</option>
+                                        <option>Pará</option>
+                                        <option>Paraíba</option>
+                                        <option>Paraná</option>
+                                        <option>Pernambuco</option>
+                                        <option>Piauí</option>
+                                        <option>Rio de Janeiro</option>
+                                        <option>Rio Grande do Norte</option>
+                                        <option>Rio Grande do Sul</option>
+                                        <option>Rondônia</option>
+                                        <option>Roraima</option>
+                                        <option>Santa Catarina</option>
+                                        <option>São Paulo</option>
+                                        <option>Sergipe</option>
+                                        <option>Tocantins</option>
+                                        </select>
+                                      <div class="invalid-feedback">
+                                        Por favor, selecione um estado
+                                      </div>
+                                    </div>
+
+                                    <!-- Input Cep -->
+                                    <div class="col-md-3 mb-3">
+                                        <label class="label-form-control d-block required" for="cep" >CEP</label >
+                                            <input
+                                              class="form-control form-control-cep w-100 masked required"
+                                              data-validate="cep"
+                                              id="cep"
+                                              name="cep"
+                                              pattern="^[0-9.-]*$"
+                                              placeholder="XXXXX-XXX"
+                                              required="required"
+                                              spellcheck="false"
+                                              title="Insira o CEP"
+                                            />
+                                      <div class="feedback"></div>
+                                    </div>
+                                  </div>
+
+                                  <!-- Input Logradouro -->
+                                  <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                      <label class="label-form-control d-block required" for="logradouro">Logradouro</label>
+                                      <input 
+                                      type="text" 
+                                      class="form-control form-control-logradouro required"
+                                      id="logradouro"
+                                      name="logradouro"
+                                      placeholder="Insira seu logradouro"
+                                      spellcheck="false"
+                                      title="Insira seu logradouro" 
+                                      required>
+                                      <div class="valid-feedback">
+                                        Tudo certo!
+                                      </div>
+                                      <div class="invalid-feedback">
+                                        Por favor, insira o logradouro
+                                      </div>
+                                    </div>
+                                    
+                                    <!-- Input Número -->
+                                    <div class="col-md-6 mb-3">
+                                      <label class="label-form-control d-block required" for="numero">Número</label>
+                                      <input 
+                                      type="number" 
+                                      class="form-control form-control-numero w-100 required" 
+                                      id="numero" 
+                                      name="numero"
+                                      placeholder="Número"
+                                      title="Insira o número"
+                                      required>
+                                      <div class="valid-feedback">
+                                        Tudo certo!
+                                      </div>
+                                      <div class="invalid-feedback">
+                                        Por favor, insira o número
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <!-- Input Email -->
+                                  <div class="form-group mx-auto">
+                                    <label class="label-form-control d-block required" for="email" >Email</label >
+                                    <input
+                                    class="form-control form-control-email w-100 required"
+                                    data-validate="email"
+                                    id="email"
+                                    name="authenticate_email"
+                                    placeholder="Insira seu email"
+                                    required="required"
+                                    spellcheck="false"
+                                    title="Enter First Name"
+                                    type="text"
+                                    />
+                                    <div class="feedback"></div>
+                                  </div>
+                                  <!-- end bootstrap form-group -->
+            
+                                  <div class="form-group form-group-password mx-auto">
+                                    <label class="label-form-control d-block required" for="password" >Senha</label>
+                                    <input
+                                      class="form-control form-control-password w-100 required"
+                                      data-validate="password"
+                                      id="password"
+                                      name="password"
+                                      placeholder="Insira sua senha"
+                                      required="required"
+                                      spellcheck="false"
+                                      title="Enter First Name"
+                                      type="password"
+                                    />
+                                    <div class="feedback"></div>
+                                    <div class="invalid-feedback">
+                                      Por favor, insira uma senha
+                                    </div>
+                                  </div>
+                                  <!-- end bootstrap form-group -->
+
+                                  <div class="form-group form-group-confirm_password mx-auto">
+                                    <label class="label-form-control d-block required" for="confirm_password" >Confirmar Senha</label>
+                                    <input
+                                      class="form-control form-control-password w-100 required"
+                                      data-validate="confirm_password"
+                                      id="confirm_password"
+                                      name="confirm_password"
+                                      placeholder="Confirme sua senha"
+                                      required="required"
+                                      spellcheck="false"
+                                      title="Enter First Name"
+                                      type="password"
+                                    />
+                                    <div class="feedback"></div>
+                                  </div>
+                                  <!-- end bootstrap form-group -->
+
+                                  <div class="form-group row">
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn w-100 botao"> Cadastrar </button>
+                                    </div>
+                                  </div>
+                                  <!-- end bootstrap form-group -->
+                                  
+                                </form>
+                              </div>
+                              <!-- end bootstrap col -->
                             </div>
-                            <!-- Input Nome Empresa -->
-                            <div class="form-group row mb-0">
-                                <label for="nome" class="col-sm-12 col-form-label"></label>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome da Empresa" required>
-                                </div>
-                            </div>
-                            <!-- Input Estado -->
-                            <div class="form-group row mb-0">
-                                <label for="estado" class="col-sm-12 col-form-label"></label>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Digite o estado" required>
-                                </div>
-                            </div>
-                            <!-- Input Cidade -->
-                            <div class="form-group row mb-0">
-                                <label for="cidade" class="col-sm-12 col-form-label"></label>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Digite a cidade" required>
-                                </div>
-                            </div>
-                            <!-- Input CEP Empresa -->
-                            <div class="form-group row mb-0">
-                                <label for="cep" class="col-sm-12 col-form-label"></label>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="cep" name="cep" placeholder="Digite o CEP" required>
-                                </div>
-                            </div>
-                            <!-- Input logradouro Empresa -->
-                            <div class="form-group row mb-0">
-                                <label for="logradouro" class="col-sm-12 col-form-label"></label>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Digite o Logradouro" required>
-                                </div>
-                            </div>
-                            <!-- Input número Empresa -->
-                            <div class="form-group row mb-0">
-                                <label for="numero" class="col-sm-12 col-form-label"></label>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="numero" name="numero" placeholder="Digite o Número" required>
-                                </div>
-                            </div>
-                            <!-- Input E-mail -->
-                            <div class="form-group row mb-0">
-                                <label for="email" class="col-sm-12 col-form-label"></label>
-                                <div class="col-md-12">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail" required>
-                                </div>
-                            </div>
-                            <!-- Input Senha -->
-                            <div class="form-group row mb-0">
-                                <label for="password" class="col-sm-12 col-form-label"></label>
-                                <div class="col-md-12">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" required>
-                                </div>
-                            </div>
-                            <!-- Input Confirmar Senha -->
-                            <div class="form-group row">
-                                <label for="confirmpassword" class="col-sm-12 col-form-label"></label>
-                                <div class="col-md-12">
-                                    <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirme sua senha" required>
-                                </div>
-                            </div>
-                            <!-- Botão de Login -->
-                            <div class="form-group row">
-                                <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn w-100 botao"> Cadastrar </button>
-                                </div>
-                            </div>
-                        </form>
+                            <!-- end bootstrap row -->
+                          </div>
+                          <!-- end bootstrap container -->
                     </div>
                 </div>  
             </div>
@@ -151,5 +300,6 @@
     <script type="text/javascript" src="javascripts/jquery.js"></script>
     <script type="text/javascript" src="javascripts/bootstrap.js"></script>
     <script type="text/javascript" src="javascripts/feedback.js"></script>
+    <script type="text/javascript" src="javascripts/validacao.js"></script>
 </body>
 </html>
